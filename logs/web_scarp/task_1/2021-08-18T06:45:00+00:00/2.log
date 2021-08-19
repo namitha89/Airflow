@@ -1,0 +1,45 @@
+[2021-08-19 02:37:59,902] {taskinstance.py:896} INFO - Dependencies all met for <TaskInstance: web_scarp.task_1 2021-08-18T06:45:00+00:00 [queued]>
+[2021-08-19 02:37:59,926] {taskinstance.py:896} INFO - Dependencies all met for <TaskInstance: web_scarp.task_1 2021-08-18T06:45:00+00:00 [queued]>
+[2021-08-19 02:37:59,926] {taskinstance.py:1087} INFO - 
+--------------------------------------------------------------------------------
+[2021-08-19 02:37:59,927] {taskinstance.py:1088} INFO - Starting attempt 2 of 2
+[2021-08-19 02:37:59,927] {taskinstance.py:1089} INFO - 
+--------------------------------------------------------------------------------
+[2021-08-19 02:37:59,967] {taskinstance.py:1107} INFO - Executing <Task(PythonOperator): task_1> on 2021-08-18T06:45:00+00:00
+[2021-08-19 02:37:59,975] {standard_task_runner.py:52} INFO - Started process 5261 to run task
+[2021-08-19 02:37:59,989] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'web_scarp', 'task_1', '2021-08-18T06:45:00+00:00', '--job-id', '424', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/web_scraping.py', '--cfg-path', '/tmp/tmpyrg54gp9', '--error-file', '/tmp/tmpc5kmhye2']
+[2021-08-19 02:37:59,991] {standard_task_runner.py:77} INFO - Job 424: Subtask task_1
+[2021-08-19 02:38:00,107] {logging_mixin.py:104} INFO - Running <TaskInstance: web_scarp.task_1 2021-08-18T06:45:00+00:00 [running]> on host c17bc53a9274
+[2021-08-19 02:38:00,224] {taskinstance.py:1302} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=web_scarp
+AIRFLOW_CTX_TASK_ID=task_1
+AIRFLOW_CTX_EXECUTION_DATE=2021-08-18T06:45:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-08-18T06:45:00+00:00
+[2021-08-19 02:38:00,226] {taskinstance.py:1501} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/scripts/scroller.py", line 20, in get_suffix_url_list
+    with (open(file, 'r')) as urls:
+FileNotFoundError: [Errno 2] No such file or directory: 'su_urls.txt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1157, in _run_raw_task
+    self._prepare_and_execute_task_with_callbacks(context, task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1331, in _prepare_and_execute_task_with_callbacks
+    result = self._execute_task(context, task_copy)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1361, in _execute_task
+    result = task_copy.execute(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 150, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 161, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/scripts/scroller.py", line 54, in get_data
+    results = get_suffix_url_list("su_urls.txt")
+  File "/opt/airflow/dags/scripts/scroller.py", line 28, in get_suffix_url_list
+    except exception as E:
+TypeError: catching classes that do not inherit from BaseException is not allowed
+[2021-08-19 02:38:00,233] {taskinstance.py:1551} INFO - Marking task as FAILED. dag_id=web_scarp, task_id=task_1, execution_date=20210818T064500, start_date=20210819T023759, end_date=20210819T023800
+[2021-08-19 02:38:00,289] {local_task_job.py:149} INFO - Task exited with return code 1
